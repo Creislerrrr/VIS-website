@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" role="img" aria-label="Pressure gauge and transmitter"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f1f3f5"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a1a7b0"/><stop offset=".5" stop-color="#eef0f2"/><stop offset="1" stop-color="#a1a7b0"/></linearGradient><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#263040" stroke-opacity=".05"/></pattern></defs><rect width="600" height="300" fill="url(#bg)"/><rect width="600" height="300" fill="url(#grid)"/>
+<rect x="0" y="236" width="600" height="30" fill="url(#metal)"/><rect x="288" y="200" width="24" height="40" fill="url(#metal)"/>
+<circle cx="300" cy="120" r="92" fill="#ffffff" stroke="url(#metal)" stroke-width="10"/><circle cx="300" cy="120" r="78" fill="#ffffff"/>
+<path d="M245 175A78 78 0 1 1 355 175" stroke="#e5e7eb" stroke-width="10" fill="none"/>
+<path d="M245 175A78 78 0 0 1 300 42" stroke="#6b7280" stroke-width="10" fill="none" opacity=".5"/>
+<path d="M300 42A78 78 0 0 1 355 175" stroke="#DF6C1F" stroke-width="10" fill="none"/>
+<g stroke="#6b7280" stroke-width="2"><path d="M300 52v12M232 120h12M368 120h-12M252 72l8 8M348 72l-8 8"/></g>
+<path d="M300 120 345 82" stroke="#DF6C1F" stroke-width="4" stroke-linecap="round"/><circle cx="300" cy="120" r="8" fill="#DF6C1F"/>
+<text x="300" y="168" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#263040" text-anchor="middle">12.4 bar</text>
+<text x="24" y="292" font-family="Inter,Arial,sans-serif" font-size="13" letter-spacing="3" fill="#6b7280">PRESSURE · ABSOLUTE / GAUGE / DIFFERENTIAL</text>
+</svg>

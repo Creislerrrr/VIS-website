@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIS – Vantage Industrial Supply & Services</title>
+    <meta name="description" content="Process instrumentation and automation from leading brands, with product selection, sizing and local engineering support in Azerbaijan.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Russian / Azerbaijani: keep the page hidden until js/i18n.js has translated it (no flash of English). -->
+    <script>
+        try {
+            var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('vis-lang') || (navigator.language || '').slice(0, 2);
+            if (l === 'ru' || l === 'az') { document.documentElement.classList.add('i18n-pending'); setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 3000); }
+        } catch (e) { /* show the page in English */ }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#DF6C1F', 'orange-dark': '#B4520F', 'orange-soft': '#FDF1E7',
+                            slate: '#3A4454', ink: '#263040', muted: '#5E6878', line: '#E5E8ED', surface: '#F5F7FA', warm: '#FBF8F4', white: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-brand-white text-brand-muted font-sans antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] bg-brand-orange text-white px-4 py-2">Skip to content</a>
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white/95 backdrop-blur border-b border-brand-line">
+        <!-- Utility bar -->
+        <div class="hidden md:block bg-brand-surface border-b border-brand-line text-xs">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
+                <span>Authorised distribution &amp; service partner in Azerbaijan</span>
+                <div class="flex items-center gap-6">
+                    <a href="tel:+994120000000" class="hover:text-brand-orange-dark">+994 12 000 00 00</a>
+                    <a href="#services" class="hover:text-brand-orange-dark">Service &amp; Support</a>
+                    <a href="#faq" class="hover:text-brand-orange-dark">FAQ</a>
+                    <div class="lang-switch" data-lang-switch data-i18n-skip role="group" aria-label="Language"></div>
+                </div>
+            </div>
+        </div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main">
+            <div class="flex justify-between h-16 items-center gap-4">
+                <a href="#top" class="flex items-center gap-3 shrink-0 hover:opacity-85 transition-opacity" aria-label="VIS – Vantage Industrial Supply &amp; Services, home">
+                    <img src="images/logo.png" alt="VIS" class="h-10 w-auto">
+                    <span lang="en" class="brand-lockup hidden sm:block lg:hidden xl:block border-l border-brand-line pl-3"><strong>VANTAGE</strong><small>Industrial Supply &amp; Services</small></span>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-4 xl:gap-5 2xl:gap-7 text-sm font-medium text-brand-ink whitespace-nowrap">
+                    <div class="relative group">
+                        <a href="#products" class="nav-link flex items-center gap-1">Products
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+                        <div class="mega-wrap absolute left-1/2 top-full pt-4">
+                            <div id="mega-menu" class="w-[34rem] bg-white border border-brand-line shadow-xl p-4 grid grid-cols-2 gap-1"></div>
+                        </div>
+                    </div>
+                    <a href="#applicator" class="nav-link">Applicator</a>
+                    <a href="#icss" class="nav-link">Control &amp; Safety</a>
+                    <a href="#industries" class="nav-link">Industries</a>
+                    <a href="#brands" class="nav-link">Brands</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <form id="search-form" class="hidden md:flex lg:hidden xl:flex items-center border border-brand-line focus-within:border-brand-orange bg-brand-surface rounded-full pl-2" role="search">
+                        <label for="search-input" class="sr-only">Search products</label>
+                        <input id="search-input" type="search" placeholder="Search products, brands…" class="bg-transparent px-3 py-2 text-sm text-brand-ink w-32 2xl:w-56 focus:outline-none">
+                        <button class="pl-1 pr-3 text-brand-muted hover:text-brand-orange" aria-label="Search">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                        </button>
+                    </form>
+                    <button id="inquiry-open" type="button" class="relative flex items-center gap-2 p-2 text-brand-ink hover:text-brand-orange" aria-label="Open inquiry list">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg><span class="hidden xl:inline text-sm font-medium">Inquiry</span>
+                        <span id="inquiry-count" class="absolute -top-0.5 left-6 min-w-[1.15rem] h-[1.15rem] px-1 rounded-full bg-brand-orange text-white text-[10px] font-bold flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button id="menu-toggle" type="button" class="lg:hidden p-2 text-brand-ink hover:text-brand-orange" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="mobile-menu lg:hidden bg-white text-brand-ink font-medium" aria-hidden="true"><div><div class="px-4 py-4 space-y-1 border-t border-brand-line">
+            <form id="search-form-mobile" class="flex border border-brand-line rounded-full overflow-hidden mb-3" role="search">
+                <label for="search-input-mobile" class="sr-only">Search products</label>
+                <input id="search-input-mobile" type="search" placeholder="Search products, brands…" class="flex-1 px-3 py-2 text-sm focus:outline-none">
+                <button class="px-3 bg-brand-orange text-white text-sm">Search</button>
+            </form>
+            <a href="#products" class="block py-2">Products</a>
+            <a href="#applicator" class="block py-2">Applicator</a>
+            <a href="#icss" class="block py-2">Control &amp; Safety</a>
+            <a href="#industries" class="block py-2">Industries</a>
+            <a href="#brands" class="block py-2">Brands</a>
+            <a href="#services" class="block py-2">Services</a>
+            <a href="#contact" class="block py-2">Contact</a>
+            <div class="lang-switch pt-3" data-lang-switch data-i18n-skip role="group" aria-label="Language"></div>
+        </div></div></div>
+    </header>
+
+    <main id="main">
+    <!-- Hero -->
+    <section id="top" class="hero pt-32 pb-16 lg:pt-44 lg:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr_1fr] gap-12 items-center">
+            <div>
+                <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-orange-dark bg-brand-orange-soft rounded-full px-3 py-1.5 mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>Measurement · Analysis · Automation</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-brand-ink leading-[1.05] tracking-tight mb-6">
+                    The right instrument for every process in <span class="text-brand-orange">Azerbaijan</span>
+                </h1>
+                <p class="text-lg mb-8 max-w-xl">
+                    Emerson as our lead partner, Endress+Hauser for specialist applications and nine more leading brands, selected with our online Applicator and backed by local engineering.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#applicator" class="btn-primary">Find the right instrument</a>
+                    <a href="#contact" class="btn-secondary">Request a quote</a>
+                </div>
+                <dl class="mt-12 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 max-w-2xl">
+                    <div class="stat"><dt>Installations</dt><dd>1,000+</dd></div>
+                    <div class="stat"><dt>Products</dt><dd>1,000+</dd></div>
+                    <div class="stat"><dt>Local support</dt><dd>24/7</dd></div>
+                    <div class="stat"><dt>Quality system</dt><dd>ISO 9001</dd></div>
+                </dl>
+            </div>
+            <div class="hero-media aspect-[4/3] lg:aspect-[5/4]">
+                <img src="images/hero-3d-tech.jpg" alt="Process instrumentation technology">
+                <div class="hero-badge flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full bg-brand-orange-soft text-brand-orange-dark grid place-items-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                    <span><strong class="block text-brand-ink text-sm">Authorised partner</strong><span class="text-xs">Engineering &amp; service in Baku</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick access tiles -->
+    <section class="section-warm border-b border-brand-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="#products" class="quick-tile"><span class="quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><span><strong>Product finder</strong><small>1,000+ Emerson &amp; E+H products</small></span></a>
+            <a href="#applicator" class="quick-tile"><span class="quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 20h16M6 16l4-6 4 3 5-8"/></svg></span><span><strong>Applicator</strong><small>Selection &amp; sizing tools</small></span></a>
+            <a href="#services" class="quick-tile"><span class="quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><span><strong>Service</strong><small>Calibration, repair, training</small></span></a>
+            <a href="#contact" class="quick-tile"><span class="quick-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg></span><span><strong>Contact</strong><small>Talk to an engineer</small></span></a>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+                <div>
+                    <p class="eyebrow">Product finder</p>
+                    <h2 class="section-title">Emerson portfolio, completed by Endress+Hauser</h2>
+                    <p class="mt-2 max-w-2xl">Emerson instruments, analyzers, valves and actuators (Rosemount, Micro Motion, Fisher, Keystone and more), plus Endress+Hauser products for applications Emerson does not cover, all available through VIS. Other brands are listed under <a href="#brands" class="text-brand-orange-dark hover:underline">Brands</a>.</p>
+                </div>
+                <p id="product-summary" class="text-sm" aria-live="polite"></p>
+            </div>
+
+            <div class="grid lg:grid-cols-[16rem_1fr] gap-8">
+                <!-- Filters -->
+                <aside class="space-y-6" aria-label="Product filters">
+                    <div>
+                        <label for="filter-text" class="filter-label">Search</label>
+                        <input id="filter-text" type="search" placeholder="e.g. Rosemount 3051, Promag, pH sensor" class="field">
+                    </div>
+                    <fieldset>
+                        <legend class="filter-label">Category</legend>
+                        <div id="filter-category" class="flex flex-wrap lg:flex-col gap-2"></div>
+                    </fieldset>
+                    <div>
+                        <label for="filter-tech" class="filter-label">Technology</label>
+                        <select id="filter-tech" class="field"><option value="">All technologies</option></select>
+                    </div>
+                    <div>
+                        <label for="filter-family" class="filter-label">Product line</label>
+                        <select id="filter-family" class="field"><option value="">All product lines</option></select>
+                    </div>
+                    <button id="filter-reset" type="button" class="text-sm font-medium text-brand-orange-dark hover:underline">Reset filters</button>
+                </aside>
+
+                <div>
+                    <div id="product-grid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                    <div class="text-center mt-8"><button id="product-more" type="button" class="btn-secondary hidden"></button></div>
+                    <p id="product-empty" class="hidden border border-dashed border-brand-line p-10 text-center">No products match these filters. <button type="button" class="text-brand-orange-dark font-medium hover:underline" data-reset>Reset filters</button></p>
+                    <p id="catalog-error" class="hidden border border-red-200 bg-red-50 text-red-700 p-6">The product catalog could not be loaded. Please start the site with <code>npm start</code> and open it via the local server.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applicator -->
+    <section id="applicator" class="py-20 bg-brand-surface border-y border-brand-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">VIS Applicator</p>
+            <h2 class="section-title mb-3">Select and size your instrument</h2>
+            <p class="max-w-3xl mb-10">Enter your process conditions and get the suitable technologies, ranked. Add your sizing values (flow rate, tank height, pipe size …) and every suitable technology is sized right away: pipe size for flowmeters, measuring range and probe length for level, sensor range for pressure, insertion length for temperature and the right assembly for analysis. Add the result to your inquiry list and our engineers confirm the final order code.</p>
+
+            <details class="info-box mb-8">
+                <summary>What do the fields mean? How does the Applicator work?</summary>
+                <div class="info-box-body">
+                    <ol class="info-steps">
+                        <li><strong>Process conditions:</strong> describe what you measure and in which conditions. The Applicator ranks every technology that can do it (best match first) and shows why the others are not suitable.</li>
+                        <li><strong>Sizing (optional):</strong> add flow rate, tank height or pipe size and each suitable technology is sized: pipe size, probe length, sensor range or insertion length.</li>
+                        <li><strong>Inquiry:</strong> add the result to your inquiry list. Our engineers check it and confirm the exact model and order code.</li>
+                    </ol>
+                    <div class="grid lg:grid-cols-2 gap-x-10 gap-y-6">
+                        <div><p class="info-title">1 · Process conditions</p><dl class="info-list">
+                        <div><dt>Measured variable</dt><dd>What you want to measure: <strong>flow</strong> (how much passes through a pipe), <strong>level</strong> (how full a tank or silo is), <strong>pressure</strong>, <strong>temperature</strong> or <strong>analysis</strong> (pH, conductivity, gas composition …).</dd></div>
+                        <div><dt>Medium</dt><dd>What is in the pipe or tank: liquid (water, oil, chemicals), gas, steam, slurry (liquid with solids, e.g. mud or pulp) or bulk solid (powder, grain, sand). It rules out technologies that cannot handle it.</dd></div>
+                        <div><dt>Temp. (°C)</dt><dd>The highest temperature of the medium during operation (not the ambient air). Technologies whose limit is too low are excluded.</dd></div>
+                        <div><dt>Pressure (bar)</dt><dd>The highest operating pressure in the pipe or tank (gauge, i.e. above atmospheric). For pressure measurement this value is also used to choose the sensor range.</dd></div>
+                        <div><dt>Conductivity (µS/cm)</dt><dd>Only for flow of liquids: how well the liquid conducts electricity. Electromagnetic flowmeters need at least 5 µS/cm. Tap water ≈ 500, demineralised water &lt; 1, oils ≈ 0. Leave it empty if you don't know.</dd></div>
+                        <div><dt>Hazardous area (Ex)</dt><dd>Tick it if the instrument is installed where explosive gas or dust can occur (refineries, gas plants, offshore). Only technologies with ATEX / IECEx versions are shown.</dd></div>
+                        <div><dt>Hygienic design</dt><dd>Tick it for food, beverage or pharma processes that need cleanable, 3-A / EHEDG-certified designs.</dd></div>
+                        </dl></div>
+                        <div><p class="info-title">2 · Sizing values</p><dl class="info-list">
+                        <div><dt>Flow (m³/h)</dt><dd>Your normal operating flow rate. Used to calculate the flow velocity and the best pipe size (DN) for each flowmeter type.</dd></div>
+                        <div><dt>Existing pipe</dt><dd>The nominal size (DN) of the pipe where the meter goes. We tell you if the meter can have the same size or needs reducers.</dd></div>
+                        <div><dt>Tank height (m)</dt><dd>Height of the tank or silo from the bottom to the top. Gives the measuring range, probe length or sensor range.</dd></div>
+                        <div><dt>Nozzle (m)</dt><dd>Height of the mounting nozzle on top of the tank (the pipe stub the instrument is screwed or flanged onto). Typically 0.1–0.3 m.</dd></div>
+                        <div><dt>Density (kg/m³)</dt><dd>Only for hydrostatic level: how heavy the liquid is. Water = 1000, diesel ≈ 840, sulphuric acid ≈ 1830.</dd></div>
+                        <div><dt>Max. differential pressure (mbar)</dt><dd>Only for DP transmitters (filter monitoring, flow via orifice, level in closed tanks): the largest pressure difference between the two sides.</dd></div>
+                        <div><dt>Pipe size (temperature / analysis)</dt><dd>The pipe the sensor is mounted in. Gives the insertion length of the thermometer, or the right assembly (bypass, inline, retractable) for analysis sensors.</dd></div>
+                        <div><dt>Velocity (m/s)</dt><dd>Optional, for temperature: how fast the medium flows. At high velocity the thermowell needs a strength calculation.</dd></div>
+                        <div><dt>Removable during operation</dt><dd>For analysis: tick it if the sensor must be taken out for cleaning or calibration without stopping the process.</dd></div>
+                        </dl>
+                        <p class="text-xs mt-3">Don't know a value? Leave it empty: you still get the technology ranking, and our engineers ask for the missing data.</p></div>
+                    </div>
+                </div>
+            </details>
+
+            <div class="grid lg:grid-cols-[22rem_1fr] gap-8">
+                <form id="select-form" class="bg-white border border-brand-line rounded-panel shadow-sm p-6 space-y-4 self-start">
+                    <p class="info-title !mb-0">1 · Process conditions</p>
+                    <div>
+                        <label for="s-variable" class="filter-label">Measured variable</label>
+                        <select id="s-variable" name="variable" class="field" required>
+                            <option value="flow">Flow</option><option value="level">Level</option><option value="pressure">Pressure</option>
+                            <option value="temperature">Temperature</option><option value="analysis">Analysis</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="s-medium" class="filter-label">Medium</label>
+                        <select id="s-medium" name="medium" class="field" required>
+                            <option value="liquid">Liquid</option><option value="gas">Gas</option><option value="steam">Steam</option>
+                            <option value="slurry">Slurry</option><option value="solid">Bulk solid</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label for="s-temp" class="filter-label">Temp. (°C)</label><input id="s-temp" name="temperature" type="number" step="any" value="80" class="field"></div>
+                        <div><label for="s-pressure" class="filter-label">Pressure (bar)</label><input id="s-pressure" name="pressure" type="number" step="any" value="10" class="field"></div>
+                    </div>
+                    <div id="s-conductivity-wrap">
+                        <label for="s-conductivity" class="filter-label">Conductivity <span class="normal-case">(µS/cm)</span> <span class="normal-case font-normal">optional</span></label>
+                        <input id="s-conductivity" name="conductivity" type="number" step="any" min="0" placeholder="e.g. 500 for tap water" class="field">
+                    </div>
+                    <label class="check"><input name="ex" type="checkbox"> Hazardous area (Ex) required</label>
+                    <label class="check"><input name="hygienic" type="checkbox"> Hygienic design required</label>
+
+                    <p class="info-title !mb-0 pt-3 border-t border-brand-line">2 · Sizing <span class="normal-case font-normal tracking-normal text-brand-muted">optional</span></p>
+                    <div class="space-y-4" data-for-var="flow">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label for="s-flow" class="filter-label">Flow (m³/h)</label><input id="s-flow" name="flow" type="number" step="any" min="0" value="45" class="field"></div>
+                            <div><label for="s-pipe" class="filter-label">Existing pipe</label><select id="s-pipe" name="pipeDn" class="field"><option value="">Not known</option><option value="15">DN 15</option><option value="25">DN 25</option><option value="40">DN 40</option><option value="50">DN 50</option><option value="65">DN 65</option><option value="80">DN 80</option><option value="100">DN 100</option><option value="125">DN 125</option><option value="150">DN 150</option><option value="200">DN 200</option><option value="250">DN 250</option><option value="300">DN 300</option><option value="350">DN 350</option><option value="400">DN 400</option><option value="500">DN 500</option><option value="600">DN 600</option></select></div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 hidden" data-for-var="level">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label for="s-height" class="filter-label">Tank height (m)</label><input id="s-height" name="height" type="number" step="any" min="0" value="8" class="field"></div>
+                            <div><label for="s-nozzle" class="filter-label">Nozzle (m)</label><input id="s-nozzle" name="nozzle" type="number" step="any" min="0" value="0.2" class="field"></div>
+                        </div>
+                        <div><label for="s-density" class="filter-label">Density (kg/m³) <span class="normal-case font-normal">for hydrostatic</span></label><input id="s-density" name="density" type="number" step="any" min="100" value="1000" class="field"></div>
+                    </div>
+                    <div class="space-y-4 hidden" data-for-var="pressure">
+                        <p class="text-xs">The pressure above is used to size the pressure transmitter.</p>
+                        <div><label for="s-dp" class="filter-label">Max. differential pressure (mbar) <span class="normal-case font-normal">for DP</span></label><input id="s-dp" name="dp" type="number" step="any" min="0" placeholder="e.g. 250" class="field"></div>
+                    </div>
+                    <div class="space-y-4 hidden" data-for-var="temperature">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label for="s-tpipe" class="filter-label">Pipe size</label><select id="s-tpipe" name="pipeDn" class="field"><option value="">Not known</option><option value="15">DN 15</option><option value="25">DN 25</option><option value="40">DN 40</option><option value="50">DN 50</option><option value="65">DN 65</option><option value="80">DN 80</option><option value="100" selected>DN 100</option><option value="125">DN 125</option><option value="150">DN 150</option><option value="200">DN 200</option><option value="250">DN 250</option><option value="300">DN 300</option><option value="350">DN 350</option><option value="400">DN 400</option><option value="500">DN 500</option><option value="600">DN 600</option></select></div>
+                            <div><label for="s-vel" class="filter-label">Velocity (m/s)</label><input id="s-vel" name="velocity" type="number" step="any" min="0" placeholder="optional" class="field"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 hidden" data-for-var="analysis">
+                        <div><label for="s-apipe" class="filter-label">Pipe size</label><select id="s-apipe" name="pipeDn" class="field"><option value="">Not known</option><option value="15">DN 15</option><option value="25">DN 25</option><option value="40">DN 40</option><option value="50">DN 50</option><option value="65">DN 65</option><option value="80">DN 80</option><option value="100" selected>DN 100</option><option value="125">DN 125</option><option value="150">DN 150</option><option value="200">DN 200</option><option value="250">DN 250</option><option value="300">DN 300</option><option value="350">DN 350</option><option value="400">DN 400</option><option value="500">DN 500</option><option value="600">DN 600</option></select></div>
+                        <label class="check"><input name="cleaning" type="checkbox"> Sensor must be removable during operation</label>
+                    </div>
+                    <button class="btn-primary w-full">Find &amp; size</button>
+                </form>
+                <div id="select-result" aria-live="polite">
+                    <div class="border border-dashed border-brand-line bg-white rounded-panel p-10 text-center">Enter your conditions and press <strong class="text-brand-ink">Find &amp; size</strong>.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ICSS: integrated control & safety systems (requirements from catalog.json → icss) -->
+    <section id="icss" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+                <div>
+                    <p class="eyebrow">Control &amp; safety systems</p>
+                    <h2 class="section-title mb-3">Built to your ICSS specification</h2>
+                    <p id="icss-intro" class="max-w-3xl"></p>
+                </div>
+                <a href="#contact" class="btn-primary shrink-0" data-icss-quote>Quote against your specification</a>
+            </div>
+            <div id="icss-list" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section id="industries" class="py-20 bg-brand-surface border-y border-brand-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">Industries</p>
+            <h2 class="section-title mb-10">From Caspian upstream to municipal water</h2>
+            <div class="grid lg:grid-cols-[18rem_1fr] gap-8">
+                <div id="industry-list" role="tablist" aria-label="Industries" aria-orientation="vertical" class="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0"></div>
+                <div id="industry-panel" class="border border-brand-line rounded-panel shadow-sm p-6 lg:p-8" role="tabpanel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands -->
+    <section id="brands" class="py-16 section-warm border-y border-brand-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-8">
+                <div><p class="eyebrow">Brands</p><h2 class="section-title">One partner, eleven manufacturers</h2></div>
+                <p class="text-sm max-w-md">Emerson as lead partner, Endress+Hauser for specialist applications, plus selected product families from nine more manufacturers. Click a brand for details.</p>
+            </div>
+            <div id="brand-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">Service &amp; Support</p>
+            <h2 class="section-title mb-10">Support across the whole lifecycle</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="service"><h3>Engineering &amp; selection</h3><p>Application review, sizing, material and approval selection for your tag list.</p></div>
+                <div class="service"><h3>Commissioning</h3><p>On-site installation checks, parameterisation and loop tests by certified engineers.</p></div>
+                <div class="service"><h3>Calibration</h3><p>On-site and workshop calibration with traceable certificates for flow, pressure and temperature.</p></div>
+                <div class="service"><h3>Repair &amp; spare parts</h3><p>Local spare-parts stock, repair coordination with the factory and fast turnaround.</p></div>
+                <div class="service"><h3>Replacement of obsolete devices</h3><p>Form-fit-function replacements for discontinued instruments, based on nameplate data.</p></div>
+                <div class="service"><h3>Training</h3><p>Hands-on courses on measurement principles, configuration and maintenance for your team.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local partner -->
+    <section id="about" class="relative">
+        <img src="images/plant-panorama.svg" alt="Industrial processing plant" loading="lazy" class="w-full h-80 lg:h-[26rem] object-cover">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative">
+            <div class="bg-white border border-brand-line rounded-panel shadow-lg p-8 lg:p-10 max-w-3xl border-t-4 border-t-brand-orange">
+                <h2 class="section-title mb-4">The local partner between the factory and your plant floor</h2>
+                <p>From our office in Baku we combine global engineering standards with regional expertise: local engineers, spare parts in stock, and delivery to your site.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow text-center">FAQ</p>
+            <h2 class="section-title text-center mb-10">Frequently asked questions</h2>
+            <div id="faq-list" class="divide-y divide-brand-line border-y border-brand-line"></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 section-warm border-t border-brand-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1fr_1.4fr] gap-10">
+            <div>
+                <p class="eyebrow">Contact</p>
+                <h2 class="section-title mb-4">Start your procurement</h2>
+                <p class="mb-8">Send us your requirements or your inquiry list. An engineer in Azerbaijan replies within one working day.</p>
+                <ul class="space-y-3 text-sm">
+                    <li><strong class="text-brand-ink">Office:</strong> Baku, Azerbaijan</li>
+                    <li><strong class="text-brand-ink">Phone:</strong> <a href="tel:+994120000000" class="hover:text-brand-orange-dark">+994 12 000 00 00</a></li>
+                    <li><strong class="text-brand-ink">Email:</strong> <a href="mailto:info@vis.az" class="hover:text-brand-orange-dark">info@vis.az</a></li>
+                </ul>
+            </div>
+            <form id="contact-form" class="bg-white border border-brand-line rounded-panel shadow-sm p-6 lg:p-8 space-y-5">
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div><label for="f-name" class="filter-label">Full name</label><input id="f-name" name="name" type="text" required autocomplete="name" class="field"></div>
+                    <div><label for="f-company" class="filter-label">Company</label><input id="f-company" name="company" type="text" required autocomplete="organization" class="field"></div>
+                </div>
+                <div><label for="f-email" class="filter-label">Email address</label><input id="f-email" name="email" type="email" required autocomplete="email" class="field"></div>
+                <div>
+                    <label for="f-project" class="filter-label">Project name / reference <span class="normal-case font-normal tracking-normal">optional</span></label>
+                    <input id="f-project" name="project" type="text" maxlength="160" class="field" placeholder="e.g. Sangachal Terminal upgrade, PO 4500-1234">
+                    <p class="text-xs mt-1">Your project name or internal reference, so we can match our quotation to it.</p>
+                </div>
+                <div id="contact-items" class="hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 mb-1.5">
+                        <p class="filter-label !mb-0">Inquiry list</p>
+                        <label class="check text-sm"><input id="tag-all" type="checkbox"> Tag / reference number for all products</label>
+                    </div>
+                    <ul id="contact-items-list" class="text-sm border border-brand-line divide-y divide-brand-line"></ul>
+                    <datalist id="ds-line-sizes"></datalist>
+                </div>
+                <div><label for="f-message" class="filter-label">Project requirements</label><textarea id="f-message" name="message" rows="5" required class="field" placeholder="Process conditions, quantities, required approvals…"></textarea></div>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+                <p id="form-status" class="text-sm hidden" role="status"></p>
+                <button type="submit" class="btn-primary">Submit inquiry</button>
+            </form>
+        </div>
+    </section>
+    </main>
+
+    <footer class="site-footer text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
+            <div>
+                <div class="flex items-center gap-3 mb-4"><img src="images/logo-on-dark.png" alt="VIS" class="h-10 w-auto"><span lang="en" class="brand-lockup border-l border-white/15 pl-3"><strong class="!text-white">VANTAGE</strong><small class="!text-slate-300">Industrial Supply &amp; Services</small></span></div>
+                <p>Industrial Supply &amp; Services. Instrumentation, automation and service for Azerbaijan.</p>
+            </div>
+            <div><h3 class="footer-title">Products</h3><ul id="footer-products" class="space-y-2"></ul></div>
+            <div><h3 class="footer-title">Company</h3><ul class="space-y-2">
+                <li><a href="#applicator" class="hover:text-white">Applicator</a></li>
+                <li><a href="#icss" class="hover:text-white">Control &amp; safety systems</a></li>
+                <li><a href="#industries" class="hover:text-white">Industries</a></li>
+                <li><a href="#services" class="hover:text-white">Services</a></li>
+                <li><a href="#faq" class="hover:text-white">FAQ</a></li></ul></div>
+            <div><h3 class="footer-title">Contact</h3><ul class="space-y-2">
+                <li>Baku, Azerbaijan</li>
+                <li><a href="tel:+994120000000" class="hover:text-white">+994 12 000 00 00</a></li>
+                <li><a href="mailto:info@vis.az" class="hover:text-white">info@vis.az</a></li></ul></div>
+        </div>
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-xs flex flex-col sm:flex-row justify-between gap-2">
+                <span>&copy; <span id="year"></span> Vantage Industrial Supply &amp; Services</span>
+                <span>Brand names are trademarks of their respective owners.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product details -->
+    <dialog id="product-dialog" class="dialog w-[min(42rem,calc(100%-2rem))]" aria-labelledby="pd-title">
+        <div id="product-dialog-body"></div>
+    </dialog>
+
+    <!-- Inquiry list drawer -->
+    <dialog id="inquiry-dialog" class="drawer" aria-labelledby="inq-title">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-5 border-b border-brand-line">
+                <h2 id="inq-title" class="text-lg font-bold text-brand-ink">Inquiry list</h2>
+                <button type="button" class="p-2 hover:text-brand-orange" data-close aria-label="Close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            </div>
+            <div id="inquiry-body" class="flex-1 overflow-y-auto p-5"></div>
+            <div class="p-5 border-t border-brand-line">
+                <a href="#contact" id="inquiry-submit" class="btn-primary w-full text-center">Request quote</a>
+            </div>
+        </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" role="img" aria-label="Flowmeter installed in a pipeline"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f1f3f5"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a1a7b0"/><stop offset=".5" stop-color="#eef0f2"/><stop offset="1" stop-color="#a1a7b0"/></linearGradient><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#263040" stroke-opacity=".05"/></pattern></defs><rect width="600" height="300" fill="url(#bg)"/><rect width="600" height="300" fill="url(#grid)"/>
+<rect x="0" y="170" width="600" height="56" fill="url(#metal)"/>
+<rect x="190" y="160" width="14" height="76" rx="2" fill="#a1a7b0"/><rect x="396" y="160" width="14" height="76" rx="2" fill="#a1a7b0"/>
+<rect x="204" y="164" width="192" height="68" rx="6" fill="#d9dde2" stroke="#a1a7b0"/>
+<rect x="282" y="110" width="36" height="54" fill="#a1a7b0"/>
+<rect x="240" y="48" width="120" height="70" rx="10" fill="#ffffff" stroke="#DF6C1F" stroke-width="2"/>
+<rect x="256" y="62" width="88" height="34" rx="3" fill="#263040"/>
+<text x="300" y="86" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#DF6C1F" text-anchor="middle">42.7 m³/h</text>
+<g stroke="#DF6C1F" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9">
+<path d="M40 198h90m-14-10 14 10-14 10"/><path d="M470 198h90m-14-10 14 10-14 10"/></g>
+<text x="24" y="282" font-family="Inter,Arial,sans-serif" font-size="13" letter-spacing="3" fill="#6b7280">FLOW · CORIOLIS / ELECTROMAGNETIC / ULTRASONIC</text>
+</svg>
