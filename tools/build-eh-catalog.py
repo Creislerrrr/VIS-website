@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# VIS website maintenance tool (run by hand, not used by the server): regenerates the Endress+Hauser
+# portfolio that backend/server.js loads at start-up. Run from the project root; see the usage below.
 """Build backend/data/eh-products.json from the E+H sitemap product URLs.
 
 Usage: python3 tools/build-eh-catalog.py tools/eh-sitemap-urls.txt backend/data/eh-products.json

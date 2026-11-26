@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# VIS website maintenance tool (run by hand, not used by the server): step 1 of 2 for the Emerson portfolio;
+# its JSON cache is the input of build-emerson-catalog.py. Run from the project root; see the usage below.
 """Fetch name (h1) and short description of Emerson product pages into a JSON cache.
 
 Usage: python3 tools/fetch-emerson-pages.py tools/emerson-sitemap-urls.txt tools/emerson-pages.json

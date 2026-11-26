@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# VIS website maintenance tool (run by hand, not used by the server): adds product photos to
+# frontend/images/eh/ and links them in the catalog data. Run from the project root; see the usage below.
 """Import official Endress+Hauser product photos into the website.
 
     python3 tools/import-images.py ~/Downloads/EH-Bilder            # match, convert, update catalog

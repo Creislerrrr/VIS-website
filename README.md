@@ -20,9 +20,11 @@ VIS-Website/
 ├── backend/
 │   ├── server.js          zero-dependency Node server
 │   ├── lib/applicator.js  selection + sizing logic
+│   ├── lib/i18n.js        server-side translations (catalog texts, messages)
 │   └── data/              catalog.json (technologies, industries, FAQ, ICSS requirements, valve datasheet fields),
 │                          emerson-products.json, icss-products.json, eh-products.json, product-info.json,
 │                          inquiries.json (git-ignored)
+├── tools/                 scripts: translation check, building the Emerson / E+H product lists
 └── package.json
 ```
 
@@ -35,6 +37,40 @@ PORT=8080 HOST=0.0.0.0 npm start
 ```
 
 No `npm install` is needed. You need Node 18 or newer.
+
+## Start here (new to the project?)
+
+The whole site is one page (`frontend/index.html`) plus a small Node server. There is no framework and no build step:
+what you see in the files is exactly what runs in the browser.
+
+**What happens when someone opens the site**
+
+1. `backend/server.js` sends `index.html`, the CSS, the JS files and the images (it is a plain static file server).
+2. In the browser, `js/i18n.js` runs first: it picks the language (EN / RU / AZ), loads `i18n/<lang>.json` and replaces
+   the English texts of the page with the translations.
+3. `js/main.js` then asks the server for the catalog (`GET /api/catalog?lang=ru`): all products, categories,
+   industries, FAQ … already translated by `backend/lib/i18n.js`.
+4. `main.js` builds the dynamic parts from that catalog (menu, product finder, brands, industries, FAQ) and listens
+   for clicks (one click handler for the whole page, see `bindEvents()`).
+5. The **Applicator** form is sent to `POST /api/applicator/select`; `backend/lib/applicator.js` scores every
+   technology for the process conditions and sizes the suitable ones. `main.js` shows the result.
+6. Products the visitor adds go into the **inquiry list** (kept in the browser's `localStorage`). The contact form sends
+   the list to `POST /api/contact`; the server checks it and saves it in `backend/data/inquiries.json`.
+
+**Where do I change …?**
+
+| I want to change …                               | File |
+|--------------------------------------------------|------|
+| a text, section or layout of the page            | `frontend/index.html` (+ the translation in `frontend/i18n/ru.json`, `az.json`) |
+| colours, spacing, look of buttons/cards          | `frontend/css/styles.css` (Tailwind classes in `index.html` for the rest) |
+| products, categories, industries, FAQ            | `backend/data/catalog.json`, `emerson-products.json`, `eh-products.json`, `icss-products.json` |
+| the texts in the product details window          | `backend/data/product-info.json` |
+| how the Applicator chooses / sizes               | `backend/lib/applicator.js` |
+| what happens on a click, how lists are drawn     | `frontend/js/main.js` |
+| a translation                                    | `frontend/i18n/ru.json` / `az.json`, then run `node tools/i18n-check.mjs` |
+
+Every source file starts with a comment that explains what it does, and the files are split into sections
+(`// ---------- … ----------`), so reading a file from the top is the easiest way in.
 
 ## API
 

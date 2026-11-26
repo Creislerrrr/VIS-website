@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!--
+        index.html: the whole VIS website as one page (no build step). Served by backend/server.js (npm start).
+
+        The static sections (header, hero, products, Applicator, ICSS, industries, brands, services, about, FAQ,
+        contact, footer) are written here in English. Empty containers (product grid, filters, Applicator results,
+        industry panel, inquiry list, dialogs) are filled by js/main.js from the catalog (GET /api/catalog).
+        Scripts: Tailwind from its CDN (config below), css/styles.css for the components, then js/i18n.js and
+        js/main.js at the end of the body.
+
+        Translations: js/i18n.js translates every visible English text in the body; the English text itself is the key
+        in i18n/ru.json and i18n/az.json. So after changing a visible text, update those files too
+        (check with: node tools/i18n-check.mjs). data-i18n-skip marks parts that are never translated.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIS – Vantage Industrial Supply & Services</title>
@@ -40,7 +53,7 @@
         <!-- Utility bar -->
         <div class="hidden md:block bg-brand-surface border-b border-brand-line text-xs">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
-                <span>Authorised distribution &amp; service partner in Azerbaijan</span>
+                <span>Supplier of only original brands &amp; products in Azerbaijan</span>
                 <div class="flex items-center gap-6">
                     <a href="tel:+994120000000" class="hover:text-brand-orange-dark">+994 12 000 00 00</a>
                     <a href="#services" class="hover:text-brand-orange-dark">Service &amp; Support</a>
@@ -115,10 +128,10 @@
                 <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-orange-dark bg-brand-orange-soft rounded-full px-3 py-1.5 mb-6">
                     <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>Measurement · Analysis · Automation</p>
                 <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-brand-ink leading-[1.05] tracking-tight mb-6">
-                    The right instrument for every process in <span class="text-brand-orange">Azerbaijan</span>
+                    The right instrument for every process in <span class="text-brand-orange">Azerbaijan, Georgia and Central Asia</span>
                 </h1>
                 <p class="text-lg mb-8 max-w-xl">
-                    Emerson as our lead partner, Endress+Hauser for specialist applications and nine more leading brands, selected with our online Applicator and backed by local engineering.
+                    Your process and your requirements come first. We choose the instrument that fits best from Emerson, Endress+Hauser and more leading brands, weighing technology, quality and cost of ownership, with our online Applicator and local and international engineering support.
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <a href="#applicator" class="btn-primary">Find the right instrument</a>
@@ -158,8 +171,8 @@
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
                 <div>
                     <p class="eyebrow">Product finder</p>
-                    <h2 class="section-title">Emerson portfolio, completed by Endress+Hauser</h2>
-                    <p class="mt-2 max-w-2xl">Emerson instruments, analyzers, valves and actuators (Rosemount, Micro Motion, Fisher, Keystone and more), plus Endress+Hauser products for applications Emerson does not cover, all available through VIS. Other brands are listed under <a href="#brands" class="text-brand-orange-dark hover:underline">Brands</a>.</p>
+                    <h2 class="section-title">Products from our partners</h2>
+                    <p class="mt-2 max-w-2xl">Instruments, analyzers, valves and actuators from Emerson (Rosemount, Micro Motion, Fisher, Keystone and more) and Endress+Hauser, all available through VIS. We recommend what suits your application best. Other brands are listed under <a href="#brands" class="text-brand-orange-dark hover:underline">Brands</a>.</p>
                 </div>
                 <p id="product-summary" class="text-sm" aria-live="polite"></p>
             </div>
@@ -334,7 +347,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-8">
                 <div><p class="eyebrow">Brands</p><h2 class="section-title">One partner, eleven manufacturers</h2></div>
-                <p class="text-sm max-w-md">Emerson as lead partner, Endress+Hauser for specialist applications, plus selected product families from nine more manufacturers. Click a brand for details.</p>
+                <p class="text-sm max-w-md">Emerson, Endress+Hauser and selected product families from nine more manufacturers, all trusted partners of VIS. Click a brand for details.</p>
             </div>
             <div id="brand-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"></div>
         </div>
@@ -420,7 +433,7 @@
     <footer class="site-footer text-slate-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
             <div>
-                <div class="flex items-center gap-3 mb-4"><img src="images/logo-on-dark.png" alt="VIS" class="h-10 w-auto"><span lang="en" class="brand-lockup border-l border-white/15 pl-3"><strong class="!text-white">VANTAGE</strong><small class="!text-slate-300">Industrial Supply &amp; Services</small></span></div>
+                <div class="flex items-center gap-3 mb-4"><img src="images/logo-on-dark.png" alt="VIS" class="h-10 w-auto"><span lang="en" class="brand-lockup border-l border-white/15 pl-3"><strong class="!text-slate-300">VANTAGE</strong><small class="!text-slate-300">Industrial Supply &amp; Services</small></span></div>
                 <p>Industrial Supply &amp; Services. Instrumentation, automation and service for Azerbaijan.</p>
             </div>
             <div><h3 class="footer-title">Products</h3><ul id="footer-products" class="space-y-2"></ul></div>

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# VIS website maintenance tool (run by hand, not used by the server): regenerates the Emerson portfolio
+# that backend/server.js loads at start-up. Step 2 of 2 (step 1: fetch-emerson-pages.py). Run from the project root.
 """Build backend/data/emerson-products.json from the fetched Emerson product pages.
 
 Usage:
